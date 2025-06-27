@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "148781520294",
+    "project_id": "yojna-mitr",
+    "storage_bucket": "yojna-mitr.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148781520294:android:b81dfb6cbccd3ef38c2b67",
+        "android_client_info": {
+          "package_name": "com.example.yojna_mitr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6ghYpIv_F1HKuXK3UrUFd8JZmdwDgkOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
