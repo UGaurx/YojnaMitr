@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class FilterService {
   final _filtersCollection = FirebaseFirestore.instance.collection('filters');
@@ -12,7 +13,9 @@ class FilterService {
         return List<String>.from(rawList);
       }
     } catch (e) {
-      print("Error fetching states: $e");
+      if (kDebugMode) {
+        print("Error fetching states: $e");
+      }
     }
     return [];
   }
@@ -26,7 +29,9 @@ class FilterService {
         return List<String>.from(rawList);
       }
     } catch (e) {
-      print("Error fetching sectors: $e");
+      if (kDebugMode) {
+        print("Error fetching sectors: $e");
+      }
     }
     return [];
   }
@@ -40,7 +45,9 @@ class FilterService {
         return List<String>.from(rawList);
       }
     } catch (e) {
-      print("Error fetching eligibility options: $e");
+        if (kDebugMode) {
+          print("Error fetching eligibility options: $e");
+        }
     }
     return [];
   }

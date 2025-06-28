@@ -56,7 +56,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Profile updated successfully!')),
       );
-      Navigator.pop(context); // 👈 Go back to ProfileScreen
+      Navigator.pop(context); // Go back to ProfileScreen
     }
   }
 
