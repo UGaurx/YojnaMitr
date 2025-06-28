@@ -54,7 +54,6 @@ class _AuthScreenState extends State<AuthScreen> {
     setState(() => _isLoading = true);
     try {
       await auth.signInWithGoogle();
-      // StreamBuilder in main.dart will automatically rebuild on login
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Sign in failed: ${e.toString()}")),

@@ -305,7 +305,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             if (value != null) {
                               setState(() => _selectedState = value);
                               _applyFilters();
-                              FocusScope.of(context).requestFocus(FocusNode());  // THIS LINE clears the highlight
+                              FocusScope.of(context).requestFocus(FocusNode());  // clears the highlight
                             }
                           },
                         ),
@@ -333,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (value != null) {
                             setState(() => _selectedSector = value);
                             _applyFilters();
-                            FocusScope.of(context).requestFocus(FocusNode());  // Clear highlight here too
+                            FocusScope.of(context).requestFocus(FocusNode());  // Clear highlight here 
                           }
                         },
                       ),

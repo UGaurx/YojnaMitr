@@ -17,7 +17,7 @@ class _AuthScreenState extends State<AuthScreen> {
   String _password = '';
   bool _isLoading = false;
   bool _isLoginMode = true;
-  bool _obscurePassword = true; // 👈 Added for show/hide password toggle
+  bool _obscurePassword = true;
 
   void _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
@@ -86,7 +86,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     const SizedBox(height: 10),
                     TextFormField(
                       key: const ValueKey('password'),
-                      obscureText: _obscurePassword, // 👈 Link with toggle
+                      obscureText: _obscurePassword, // Link with toggle
                       decoration: InputDecoration(
                         labelText: 'Password',
                         suffixIcon: IconButton(

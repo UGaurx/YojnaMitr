@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../../auth_gate.dart';  // 👈 Import this
+import '../../../auth_gate.dart'; 
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,22 +26,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal[300],
+      backgroundColor: const Color(0xFF141218),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.account_balance, size: 80, color: Colors.white),
+            Image.asset("assets/icon.png", width: 200, height: 200),
             const SizedBox(height: 16),
-            Text(
-              "YojnaMitr",
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-            const SizedBox(height: 12),
-            const CircularProgressIndicator(color: Colors.white),
+            // Text(
+            //   "YojnaMitr",
+            //   style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+            //         color: Colors.white,
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            // ),
+            // const SizedBox(height: 12),
+            // const CircularProgressIndicator(color: Colors.white),
           ],
         ),
       ),

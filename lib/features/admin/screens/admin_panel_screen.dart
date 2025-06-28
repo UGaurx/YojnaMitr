@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// Import your add scheme form screen here:
 import '../widgets/add_scheme_form.dart'; 
 
 class AdminPanelScreen extends StatefulWidget {

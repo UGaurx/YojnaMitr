@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                   if (context.mounted) {
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (_) => const AuthGate()), // 👈 or SplashScreen if you want
+                      MaterialPageRoute(builder: (_) => const AuthGate()), 
                       (route) => false,
                     );
                   }
