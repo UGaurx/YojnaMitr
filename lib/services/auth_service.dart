@@ -1,5 +1,8 @@
+// lib/services/auth_service.dart
+
+import 'dart:io' show Platform;
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -15,65 +18,46 @@ class AuthService {
     return _auth.createUserWithEmailAndPassword(email: email, password: password);
   }
 
-  Future<void> signOut() => _auth.signOut();
-
   Future<UserCredential> signInWithGoogle() async {
-    final googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+    final googleSignIn = GoogleSignIn.instance;
 
-    if (googleUser == null) {
-      throw FirebaseAuthException(
-        code: 'ERROR_ABORTED_BY_USER',
-        message: 'Sign in aborted by user',
+    // Initialize with correct client IDs
+    if (kIsWeb) {
+      await googleSignIn.initialize(
+        clientId: '148781520294-146b7obuoec8n0b5fqksccm1miej0q59.apps.googleusercontent.com', // web client id
+      );
+    } else {
+      await googleSignIn.initialize(
+        clientId: Platform.isIOS
+            ? 'YOUR_IOS_CLIENT_ID.apps.googleusercontent.com' // Replace with iOS client ID
+            : null,
+        serverClientId: '148781520294-146b7obuoec8n0b5fqksccm1miej0q59.apps.googleusercontent.com', // web client id for Android
       );
     }
 
-    final googleAuth = await googleUser.authentication;
+    // Optional: Lightweight auth
+    await googleSignIn.attemptLightweightAuthentication();
+
+    final user = await googleSignIn.authenticate();
+    if (user == null) {
+      throw FirebaseAuthException(
+        code: 'ERROR_ABORTED_BY_USER',
+        message: 'Sign in aborted',
+      );
+    }
+
+    final auth = await user.authentication;
 
     final credential = GoogleAuthProvider.credential(
-      idToken: googleAuth.idToken,
-      accessToken: googleAuth.accessToken,
+      idToken: auth.idToken,
     );
 
     return await _auth.signInWithCredential(credential);
   }
-}
 
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
 
-  @override
-  State<AuthScreen> createState() => _AuthScreenState();
-}
-
-class _AuthScreenState extends State<AuthScreen> {
-  bool _isLoading = false;
-  final auth = AuthService();
-
-  void _handleSignIn() async {
-    setState(() => _isLoading = true);
-    try {
-      await auth.signInWithGoogle();
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Sign in failed: ${e.toString()}")),
-      );
-    } finally {
-      setState(() => _isLoading = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _isLoading
-            ? const CircularProgressIndicator()
-            : ElevatedButton(
-                onPressed: _handleSignIn,
-                child: const Text('Sign in with Google'),
-              ),
-      ),
-    );
+  Future<void> signOut() async {
+    await GoogleSignIn.instance.signOut();	
+    await _auth.signOut();
   }
 }
